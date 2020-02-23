@@ -1,9 +1,9 @@
 // Dependencies
-const inquirer = require("inquirer");
-const mysql = require("mysql");
-const table = require("console.table");
+var inquirer = require("inquirer");
+var mysql = require("mysql");
+var table = require("console.table");
 
-let connection = mysql.createConnection({
+var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
@@ -85,7 +85,7 @@ function addDep(){
     }
     ]).then(function(response){
         insertInto("department", response);
-    })
+    });
 };
 function addRole(){
     console.log("You chose to add a Role");
@@ -106,7 +106,7 @@ function addRole(){
     }
     ]).then(function(response){
         insertInto("role", response);
-    })
+    });
 };
 function addEmpl(){
     console.log("You chose to add a Employee");
@@ -132,7 +132,7 @@ function addEmpl(){
     }
     ]).then(function(response){
         insertInto("employee", response);
-    })
+    });
 };
 
 function selectView(table){
@@ -169,7 +169,7 @@ function view(){
             default:
                 console.log("Error: Nothing selected");
         }
-    })
+    });
 };
 
 function viewDep(){
