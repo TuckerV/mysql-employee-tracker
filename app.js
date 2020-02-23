@@ -2,7 +2,6 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const table = require("console.table");
-// require('dotenv').config();
 
 let connection = mysql.createConnection({
     host: "localhost",
@@ -138,7 +137,6 @@ function addEmpl(){
 
 function selectView(table){
     var queryString = "SELECT * FROM ??";
-    // console.log(queryString);
     connection.query(queryString, [table], function(err, result){
         if (err) throw err;
         console.log("\n");
@@ -185,5 +183,24 @@ function viewEmpl(){
 };
 
 function update(){
-    console.log("You chose to UPDATE")
+    // console.log("You chose to UPDATE")
+    inquirer.prompt([{
+        type: 'input',
+        name: 'role_id',
+        message: "New Role id you wish to give employee: "
+    },
+    {
+        type: 'input',
+        name: 'first_name',
+        message: "Name of employee you wish to update to new role: " 
+    }
+    ]).then(function(response){
+        var queryString = "UPDATE employee SET role_id = ? WHERE first_name = ?";
+        // console.log(response);
+        connection.query(queryString, [response.role_id, response.first_name], function(err, result){
+            if (err) throw err;
+            // console.log(response);
+        });
+        init();
+    })
 };
