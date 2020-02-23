@@ -8,7 +8,7 @@ let connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "",
+    password: "Tuckjv93",
     database: "employee_db"
 });
 
@@ -67,14 +67,73 @@ function add(){
     })
 };
 
+function insertInto(table, response){
+    var queryString = "INSERT INTO ?? SET ?";
+
+    connection.query(queryString, [table, response], function(err, result){
+        if (err) throw err;
+        // console.log(" ... ADDED ...")
+    });
+    init();
+}
+
 function addDep(){
     console.log("You chose to add a department");
+    inquirer.prompt([{
+        type: 'input',
+        name: 'name',
+        message: "Please type the department name: "
+    }
+    ]).then(function(response){
+        insertInto("department", response);
+    })
 };
 function addRole(){
     console.log("You chose to add a Role");
+    inquirer.prompt([{
+        type: 'input',
+        name: 'title',
+        message: "Please input role title: "
+    },
+    {
+        type: 'input',
+        name: 'salary',
+        message: "Please input role salary: "
+    },
+    {
+        type: 'input',
+        name: 'department_id',
+        message: "Please input department id: "
+    }
+    ]).then(function(response){
+        insertInto("role", response);
+    })
 };
 function addEmpl(){
     console.log("You chose to add a Employee");
+    inquirer.prompt([{
+        type: 'input',
+        name: 'first_name',
+        message: "Employee first name: "
+    },
+    {
+        type: 'input',
+        name: 'last_name',
+        message: "Employee last name: "
+    },
+    {
+        type: 'input',
+        name: 'role_id',
+        message: "Employee role id: "
+    },
+    {
+        type: 'input',
+        name: 'manager_id',
+        message: "Employee manager id: "
+    }
+    ]).then(function(response){
+        insertInto("employee", response);
+    })
 };
 
 function selectView(table){
