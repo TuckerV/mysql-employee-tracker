@@ -4,6 +4,7 @@
   "description": "Terminal based application allowing user to manage a team of employees",
   "main": "app.js",
   "dependencies": {
+    "console.table": "^0.10.0",
     "inquirer": "^7.0.4",
     "mysql": "^2.18.1"
   },
